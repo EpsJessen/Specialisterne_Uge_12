@@ -75,6 +75,8 @@ def print_page_md():
         #        "##### **Concluding the Adventure**",
         #        "blah blah"
         #        ]
+        text_proper = []
         for line in text:
             if line == '' or re.match("[*]*paizo", line) or re.match("([0-9]|[\s])*$", line):
                 continue
+            text_proper.append(line)
