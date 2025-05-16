@@ -29,3 +29,105 @@ class Creature_Writer(Writer):
             sign = "-"
         return sign + str(number)
 
+    def write_statblock(self):
+        with open(self.path, mode="a") as stat_path:
+            stat_path.write(f"```statblock\n")
+            stat_path.write(f"columns: 2\n")
+            stat_path.write(f"forcecolumns: true\n")
+            stat_path.write(f"layout: Basic Pathfinder 2e Layout\n")
+            stat_path.write(f"source: \"{self.source}\"\n")
+            stat_path.write(f"name: \"{self.description.get("name")}\"\n")
+            level = self.description.get("level", 0)
+            stat_path.write(f"level: \"Creature {level}\"\n")
+            if self.description.get("rarity") is not None:
+                stat_path.write(f"rare_03: [[{self.description.get("rarity")}]]\n")
+            stat_path.write(f"alignment: \"\"\n")
+            stat_path.write(f"size: \"{self.description.get("size")}\"\n")
+            for i, trait in enumerate(self.description.get("traits"), 1):
+                trait_nr = str(i)
+                if len(trait_nr) == 1:
+                    trait_nr = "0" + trait_nr
+                stat_path.write(f"trait_{trait_nr}: [[{trait}]]\n")
+            perception = self.description.get("perception", 0)
+            signed_perception = self.get_signed_number(perception)
+            stat_path.write(f"modifier: {perception}\n")
+            stat_path.write(f"perception:\n")
+            stat_path.write(f"  - name: \"Perception\"\n")
+            stat_path.write(f"    desc: \"{signed_perception}; {self.description.get("senses","")}\"\n")
+            languages_str = ""
+            for language in self.description.get("languages", {}):
+                languages_str += (f"{language}, ")
+            stat_path.write(f"languages: \"{languages_str[:-2]}\"\n")
+            stat_path.write(f"skills:\n")
+            stat_path.write(f"  - name: \"Skills\"\n")
+            skill_str = ""
+            for skill in self.description.get("skills", {}):
+                skill_str += (f"{skill}, ")
+            stat_path.write(f"    desc: \"{skill_str[:-2]}\"\n")
+            ability_scores = ""
+            for ability in ["str", "dex", "con", "int", "wis", "cha"]:
+                ability_scores += self.description.get(ability, 0) + ", "
+            stat_path.write(f"abilityMods: [{ability_scores[:-2]}]\n")
+            speeds = ""
+            for speed in self.description.get("speed", ["0"]):
+                speeds += speed + " feet, "
+            stat_path.write(f"speed: {speeds[:-2]}\n")
+            stat_path.write(f"sourcebook: \"_{self.source}_\"\n")
+            armor_class = self.description.get("ac", 10)
+            stat_path.write(f"ac: {armor_class}\n")
+            stat_path.write(f"armorclass:\n")
+            stat_path.write(f"  - name: AC\n")
+            fort = self.description.get("fort")
+            ref = self.description.get("ref")
+            will = self.description.get("will")
+            stat_path.write(f"    desc: \"{armor_class}; __Fort__ {fort}, __Ref__ {ref}, __Will__ {will}\"\n")
+            hp = self.description.get("hp")
+            stat_path.write(f"hp: {hp}\n")
+            stat_path.write(f"health:\n")
+            stat_path.write(f" - name: \"\"\n")
+            stat_path.write(f" - name: HP\n")
+            immunities_str = ""
+            immunities = self.description.get("immunities")
+            if immunities is not None and immunities != []:
+                immunities_str = "__Immunities__ "
+                for immunity in immunities:
+                    immunities_str += immunity + ", "
+                immunities_str = immunities_str[:-2] + "; "
+            resistances_str = ""
+            resistances = self.description.get("resistances")
+            if resistances is not None and resistances != []:
+                resistances_str = "__Resistances__ "
+                for resistance in self.description.get("resistances"):
+                    resistances_str += resistance + ", "
+                resistances_str = resistances_str[:-2] + "; "
+            stat_path.write(f"   desc: \"{hp}; {immunities_str}{resistances_str}\"\n")
+            stat_path.write(f"abilities_top:\n")
+            stat_path.write(f"  - name: \"\"\n")
+            stat_path.write(f"\n")
+            for ability in self.description.get("abilities_top"):
+                stat_path.write(f"  - name: \"{ability.get("name")}\"\n")
+                description_str = ""
+                descriptions = ability.get("desc")
+                for description in descriptions:
+                    multiple = re.search('[(][0-9]+[)]$', description)
+                    if multiple:
+                        description_str += f"{multiple.group()[1:-1]}x "
+                        description = description[:-len(multiple.group())-1]
+                    description_str += description + ", "
+                stat_path.write(f"    desc: \" {description_str[:-2]}\"\n\n")
+            stat_path.write(f"abilities_mid:\n")
+            stat_path.write(f"  - name: \"\"\n")
+            for ability in self.description.get("abilities_mid"):
+                stat_path.write(f"  - name: \"{ability.get("name")}\"\n")
+                stat_path.write(f"    desc: \" {ability.get("desc")}\"\n\n")
+            stat_path.write(f"attacks:\n")
+            stat_path.write(f"  - name: \"\"\n")
+            attacks = self.description.get("attacks", [])
+            for attack in attacks:
+                name = attack.get("name")
+                desc = attack.get("desc")
+                damage = attack.get("damage")
+                stat_path.write(f"\n  - name: \"{name}\"\n")
+                stat_path.write(f"    desc: \"{desc}\\n__Damage__ {damage}\"\n")
+            stat_path.write(f"```\n\n")
+
