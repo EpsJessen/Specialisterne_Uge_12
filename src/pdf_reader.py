@@ -99,3 +99,13 @@ def print_page_md():
             if (not found) and (writing not in [2, 3]) and ((len(line) == 1) or (re.match("[#]+ [*]*[A-Z]([A-Z]|[0-9])*", line)) or re.match("([*]+[A-Z]([A-Z]|[0-9]|’| |[.])*[*]+[ ]*)+$", line)):
                 writing = 0
                 continue
+
+            
+
+            if found:
+                description_points.append([found])
+                description_index += 1
+                writing = 1
+            if writing != 0:
+                description_points[description_index][0] += " " + line
+                writing += 1
