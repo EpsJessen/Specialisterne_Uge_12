@@ -189,3 +189,12 @@ def main():
         "attacks": [{"name": "**Melee** `pf2:1` Horsechopper", "desc": "+10 (reach 10 feet, trip, versatile p)", "damage":  "1d8 + 6 slashing"},
                     {"name": "**Melee** `pf2:1` Fist", "desc": "+10 (agile, shove)", "damage": "1d4 + 4 bludgeoning"}]
     }
+
+    path = join("data", "epsilon", "mean_orc.md")
+    c_writer = Creature_Writer(path=path, source="My Imagination", license="ORC", creature=creature_description)
+    c_writer.write_properties()
+    c_writer.write_statblock()
+    c_writer.write_encounter()
+
+if __name__ == "__main__":
+    main()
