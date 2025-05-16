@@ -75,3 +75,6 @@ def print_page_md():
         #        "##### **Concluding the Adventure**",
         #        "blah blah"
         #        ]
+        for line in text:
+            if line == '' or re.match("[*]*paizo", line) or re.match("([0-9]|[\s])*$", line):
+                continue
