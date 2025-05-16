@@ -96,3 +96,6 @@ def print_page_md():
                 if keyword in line:
                     found = keyword
             
+            if (not found) and (writing not in [2, 3]) and ((len(line) == 1) or (re.match("[#]+ [*]*[A-Z]([A-Z]|[0-9])*", line)) or re.match("([*]+[A-Z]([A-Z]|[0-9]|’| |[.])*[*]+[ ]*)+$", line)):
+                writing = 0
+                continue
