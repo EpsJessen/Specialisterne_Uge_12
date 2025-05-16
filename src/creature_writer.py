@@ -131,3 +131,21 @@ class Creature_Writer(Writer):
                 stat_path.write(f"    desc: \"{desc}\\n__Damage__ {damage}\"\n")
             stat_path.write(f"```\n\n")
 
+    def write_encounter(self):
+        with open(self.path, mode="a") as encounter_path:
+            encounter_path.write("```encounter-table\n")
+            encounter_path.write(f"name: {self.description.get("name")}\n")
+            encounter_path.write(f"creatures:\n")
+            encounter_path.write(f"  - 1: {self.description.get("name")}\n")
+            encounter_path.write(f"\n```\n")
+            encounter_path.write(f"\n\n{self.description.get("description text")}\n\n")
+
+            
+
+            
+
+
+
+
+
+
