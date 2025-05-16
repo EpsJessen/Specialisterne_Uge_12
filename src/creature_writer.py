@@ -149,3 +149,43 @@ class Creature_Writer(Writer):
 
 
 
+def main():
+    creature_description = {
+        "title": "Mean Orc",
+        "tags": [
+            "pf2e/creature/type/humanoid",
+            "pf2e/creature/type/orc",
+            "pf2eMonster",
+            "pf2e/creature/level/2",
+            "Epsilon"
+        ],
+        "name": "Mean Orc",
+        "level": 2,
+        "description text": "Having spent their lives fighting for dominace in their clan, these brutes have learned how to instill fear in their opponents. While this is effective in one on one battles, and often brings the mean orcs high into the hierachy, it presents a problem for them when they are unable to intimidate themselves to a higher position.\n\nWhen a mean orc cannot rise further within the clan, they often find themself without any skills with which to be useful. With half the clan being too terrified to work with them, they are not useful to the community, and are thus often thrown out.\n\nThus Mean Orcs are often lone figures, wandering without purpose from one robbery to the next. However, should one raise to the top of a clan, it will often lead to a short stint of terror and violence before it's subjects or a group of adventurers depose it.",
+        "rarity": "Uncommon",
+        "size": "medium",
+        "traits": ["humanoid", "orc", "evil"],
+        "perception": 5,
+        "senses": "Darkvision",
+        "languages": ["Common", "Orcish", "Beastial Anger"],
+        "skills": ["Athletics: +7", "Intimidation: +12"],
+        "str": "6",
+        "dex": "-1",
+        "con": "3",
+        "int": "-2",
+        "wis": "0",
+        "cha": "3",
+        "speed": ["25", "swim 10"],
+        "ac": 16,
+        "fort": "+9",
+        "ref": "+3",
+        "will": "+6",
+        "hp": "36",
+        "immunities": ["bleed effects"],
+        "resistances": [],
+        "abilities_top": [{"name": "Items", "desc": ["dog collar", "horsechopper", "dagger (2)"]},
+                          {"name": "Beastial Anger", "desc": ["(visual) Using body language, the Mean Orc can choose to let all creatures which observes it know what mood it is in. The Mean Orc is always angry"]}],
+        "abilities_mid": [{"name": "Frightful Whisper", "desc": "`pf2:1` (auditory, emotion, mental) The Mean Orc whispers a threat to a creature within 5 feet. If the creature understands the Mean Orc's threats, it takes minus 2 on all saves to resist fear effects from the Mean Orc's actions."}],
+        "attacks": [{"name": "**Melee** `pf2:1` Horsechopper", "desc": "+10 (reach 10 feet, trip, versatile p)", "damage":  "1d8 + 6 slashing"},
+                    {"name": "**Melee** `pf2:1` Fist", "desc": "+10 (agile, shove)", "damage": "1d4 + 4 bludgeoning"}]
+    }
