@@ -85,3 +85,9 @@ def print_page_md():
         description_index = -1
         page = 0
         writing = 0
+        for line in text_proper:
+
+            if re.match("[#]+ [*]+[0-9]+[*]+$", line):
+                page = line.split(' ')[-1]
+                continue
+
