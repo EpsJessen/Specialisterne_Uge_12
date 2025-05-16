@@ -10,6 +10,10 @@ pdf_path = join("data", "fistful_flowers.pdf")
 doc = pymupdf.open(filename=pdf_path, filetype="pdf")
 #print(doc[9].get_text())
 #print(doc[10].get_text())
+keywords = ['HAZARD', '**CREATURE']
+
+
+
 def extract_info(page_start, page_end):
     descriptions = []
     description_index = -1
@@ -20,3 +24,9 @@ def extract_info(page_start, page_end):
             paragraph = paragraph[4]
             if re.match("paizo", paragraph) or re.match("([0-9]|[\s])*$", paragraph):
                 continue
+            
+            found = False
+            for keyword in keywords:
+                if keyword in paragraph:
+                    found = keyword
+            #        print(f"The following keyword was found: {found} in paragraph: {paragraph}")
