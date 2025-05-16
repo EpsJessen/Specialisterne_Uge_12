@@ -51,3 +51,10 @@ def print_page(page):
             continue
         print(f"{j}:\n{paragraph}")
 
+def print_page_html(start, end):
+    with open("data/test.html", "w") as file:
+        for i in range(start, end):
+            page = doc[i-1].get_text("xhtml")
+    
+            file.write(page)
+
