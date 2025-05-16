@@ -80,3 +80,8 @@ def print_page_md():
             if line == '' or re.match("[*]*paizo", line) or re.match("([0-9]|[\s])*$", line):
                 continue
             text_proper.append(line)
+        #text_proper = '\n'.join(text_proper)
+        description_points = []
+        description_index = -1
+        page = 0
+        writing = 0
