@@ -58,3 +58,10 @@ def print_page_html(start, end):
     
             file.write(page)
 
+def print_page_json(start, end):
+    with open("data/test.json", "w") as file:
+        for i in range(start, end):
+            page = doc[i-1].get_text("rawjson")
+    
+            file.write(page)
+
