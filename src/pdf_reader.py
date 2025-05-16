@@ -10,3 +10,13 @@ pdf_path = join("data", "fistful_flowers.pdf")
 doc = pymupdf.open(filename=pdf_path, filetype="pdf")
 #print(doc[9].get_text())
 #print(doc[10].get_text())
+def extract_info(page_start, page_end):
+    descriptions = []
+    description_index = -1
+    writing = 0
+    for i, page in enumerate(doc[page_start-1:page_end]):
+        text = page.get_text("blocks")
+        for j, paragraph in enumerate(text):
+            paragraph = paragraph[4]
+            if re.match("paizo", paragraph) or re.match("([0-9]|[\s])*$", paragraph):
+                continue
