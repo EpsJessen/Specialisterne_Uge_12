@@ -23,3 +23,9 @@ class Creature_Writer(Writer):
             prop_path.write(f"license: {self.license}\n")
             prop_path.write("---\n\n")
 
+    def get_signed_number(self, number):
+        sign = "+"
+        if number < 0:
+            sign = "-"
+        return sign + str(number)
+
