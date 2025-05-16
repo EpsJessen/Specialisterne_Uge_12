@@ -44,3 +44,10 @@ def extract_info(page_start, page_end):
                 writing += 1
     print(descriptions)
 
+def print_page(page):
+    for j, paragraph in enumerate(doc[page].get_text("blocks")):
+        paragraph = paragraph[4]
+        if re.match("paizo", paragraph) or re.match("([0-9]+[\s]*)+$", paragraph):
+            continue
+        print(f"{j}:\n{paragraph}")
+
