@@ -34,3 +34,13 @@ def extract_info(page_start, page_end):
             if (not found) and (writing != 2) and ((len(paragraph) == 1) or (re.match("([A-Z]|[0-9]|[.]|[\s]|’)+\n", paragraph))):
                 writing = 0
                 continue
+            
+            if found:
+                descriptions.append([found, i+1])
+                description_index += 1
+                writing = 1
+            if writing != 0:
+                descriptions[description_index][0] += " " + paragraph
+                writing += 1
+    print(descriptions)
+
