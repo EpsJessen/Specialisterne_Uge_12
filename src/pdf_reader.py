@@ -65,3 +65,13 @@ def print_page_json(start, end):
     
             file.write(page)
 
+def print_page_md():
+        text = pymupdf4llm.to_markdown(pdf_path)
+        text = text.split('\n')
+        #text = ["If the PCs defeat all of the enemy leshys...",
+        #        "**MELIOSA’S LESHYS (4)** **CREATURE 2**",
+        #        "**UNIQUE** **N** **SMALL** **LESHY** **PLANT**",
+        #        "...",
+        #        "##### **Concluding the Adventure**",
+        #        "blah blah"
+        #        ]
