@@ -109,3 +109,14 @@ def print_page_md():
             if writing != 0:
                 description_points[description_index][0] += " " + line
                 writing += 1
+        print(description_points)
+            
+        #pathlib.Path("data/test.md").write_text(text)
+        #with open("data/test.md", "r") as md:
+        #    md_content = md.read()
+        #    md_content = md_content
+        #    for line in md_content:
+        #        print(line)
+        #print(text_proper)
+
+print_page_md()
